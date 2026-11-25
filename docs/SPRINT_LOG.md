@@ -257,6 +257,19 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Seluruh 102 pengujian unit dan integrasi tetap lulus 100% via `npm test`.
   - Branch `feat/fase-9` di-merge ke `main`.
 
+### Sprint 10: Integrasi CI & Rilis Paket
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - Konfigurasi alur kerja CI terotomatisasi di `.github/workflows/ci.yml` yang mencakup pengujian multi-platform (Ubuntu, Windows, macOS) pada matriks Node.js 18.x, 20.x, dan 22.x serta pembangunan paket rilis.
+  - Pembuatan skrip kemasan mandiri zero-dependency `scripts/build_zip.js` yang menghasilkan paket distribusi peramban berekstensi PKZIP standar (`dist/phishshield-v1.0.0.zip`).
+  - Penambahan skrip `"build": "node scripts/build_zip.js"` pada `package.json`.
+  - Penambahan pengujian unit `tests/unit/build_zip.test.js` untuk memverifikasi integritas struktur berkas zip.
+  - Sinkronisasi versi rilis `1.0.0` pada `package.json` dan `extension/manifest.json`.
+  - Pembaruan `CHANGELOG.md` merilis versi `[1.0.0]`.
+  - Rangkaian pengujian bertambah dari 102 menjadi 104 tes (seluruh 104 tes lulus 100% via `npm test`).
+  - Branch `feat/fase-10` di-merge ke `main`, dilanjutkan pembuatan tag Git `v1.0.0`.
+
 
 
 

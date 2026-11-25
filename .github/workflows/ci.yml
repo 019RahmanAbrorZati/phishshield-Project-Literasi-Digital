@@ -1,0 +1,39 @@
+name: PhishShield CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-and-build:
+    name: Test & Build (Node ${{ matrix.node-version }} on ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Run Test Suite (node:test)
+      run: npm test
+
+    - name: Build Distribution Package (.zip)
+      run: npm run build
+
+    - name: Upload Artifact (Ubuntu Node 20 only)
+      if: matrix.os == 'ubuntu-latest' && matrix.node-version == '20.x'
+      uses: actions/upload-artifact@v4
+      with:
+        name: phishshield-extension-dist
+        path: dist/*.zip

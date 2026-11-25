@@ -5,7 +5,21 @@ Format berkas ini mengacu pada [Keep a Changelog](https://keepachangelog.com/id/
 
 ---
 
-## [Unreleased] - Fase 9
+## [1.0.0] - 2026-11-25 (Fase 10: Rilis Stabil & Integrasi CI)
+
+### Ditambahkan
+- Workflow CI GitHub Actions `.github/workflows/ci.yml` yang menjalankan pengujian otomatis di 3 sistem operasi (*Ubuntu, Windows, macOS*) pada Node.js matrix (18.x, 20.x, 22.x) serta memicu proses build arsip rilis.
+- Skrip packaging mandiri tanpa dependensi `scripts/build_zip.js` yang menghasilkan arsip distribusi PKZIP standar peramban (`dist/phishshield-v1.0.0.zip`).
+- Perintah npm baru `"npm run build"` di `package.json`.
+- Pengujian unit otomatis `tests/unit/build_zip.test.js` untuk memvalidasi integritas berkas arsip zip.
+- Penandaan rilis resmi Git Tag `v1.0.0`.
+
+### Diubah
+- Sinkronisasi versi paket ke `1.0.0` pada `package.json` dan `extension/manifest.json`.
+
+---
+
+## [0.9.0] - 2026-11-25 (Fase 9: Dokumentasi Menyeluruh)
 
 ### Ditambahkan
 - **Dokumentasi Lengkap Proyek**:
