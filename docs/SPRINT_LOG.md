@@ -215,6 +215,21 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Tombol interaktif "Periksa Elemen Halaman Ini" diintegrasikan ke popup.
   - Branch `feat/fase-6` di-merge ke `main`.
 
+### Sprint 7: Pengujian Menyeluruh (Comprehensive Testing)
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - Struktur pengujian tertata rapi di `tests/unit/` dan `tests/integration/`.
+  - Uji integrasi alur utuh `tests/integration/e2e_flow.test.js` memvalidasi konversi URL $\rightarrow$ fitur $\rightarrow$ prediksi $\rightarrow$ keputusan $\rightarrow$ alasan risiko.
+  - Fixture `tests/fixtures/legit_hosts.json` memuat 50 situs sah Indonesia dan global.
+  - Tes kewajaran `tests/integration/legit_hosts.test.js` membuktikan secara empiris:
+    - Tanpa allowlist, model murni hanya menandai 2 dari 50 situs sah pada preset Seimbang (4,0% false positive) dan 1 dari 50 situs sah pada preset Ketat (2,0% false positive: `seller.tokopedia.com`).
+    - Preset Ketat berhasil menekan false alarm pada `ocbc.id` (skor 0,6609 lolos aman pada ambang 0,7).
+  - Dokumen `docs/TESTING.md` selesai disusun memuat strategi pengujian, tabel hasil 91 tes, analisis kewajaran empiris, dan 8 poin checklist panduan uji manual di Google Chrome.
+  - Seluruh 91 tes lulus 100% via `npm test`.
+  - Branch `feat/fase-7` di-merge ke `main`.
+
+
 
 
 
