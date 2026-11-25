@@ -2,10 +2,145 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>PhishShield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishShield Popup</title>
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <h1>PhishShield</h1>
-  <p>Pemeriksa Keamanan Hostname</p>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="logo-group">
+        <span class="logo-icon" aria-hidden="true">🛡️</span>
+        <div>
+          <h1 class="logo-title">PhishShield</h1>
+          <span class="logo-version">v0.1.0 • Klien Murni</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="popup-nav" role="tablist">
+      <button class="nav-tab active" data-tab="tab-status" role="tab" aria-selected="true" id="nav-btn-status">Status</button>
+      <button class="nav-tab" data-tab="tab-whitelist" role="tab" aria-selected="false" id="nav-btn-whitelist">Whitelist</button>
+      <button class="nav-tab" data-tab="tab-settings" role="tab" aria-selected="false" id="nav-btn-settings">Preset</button>
+      <button class="nav-tab" data-tab="tab-education" role="tab" aria-selected="false" id="nav-btn-education">Belajar</button>
+    </nav>
+
+    <!-- Tab 1: Status Situs Aktif -->
+    <section class="tab-pane active" id="tab-status" role="tabpanel">
+      <div class="site-card">
+        <span class="site-card-label">Situs Tab Aktif</span>
+        <code class="site-host" id="active-host">Memeriksa tab...</code>
+        
+        <div class="status-indicator-box" id="status-box">
+          <span class="status-badge" id="status-badge">-</span>
+          <span class="status-score" id="status-score">-</span>
+        </div>
+
+        <p class="status-desc" id="status-desc">Memeriksa struktur hostname...</p>
+
+        <button type="button" class="btn btn-sm btn-outline" id="btn-quick-whitelist" style="display: none;">
+          + Tambahkan Host Ini ke Whitelist
+        </button>
+      </div>
+    </section>
+
+    <!-- Tab 2: Whitelist Pribadi Pengguna -->
+    <section class="tab-pane" id="tab-whitelist" role="tabpanel">
+      <h2 class="section-title">Whitelist Domain Pribadi</h2>
+      <p class="section-desc">
+        Situs dalam whitelist dikecualikan dari pemeriksaan model. Gunakan format persis atau <code>*.domain.com</code> untuk subdomain.
+      </p>
+
+      <form class="add-whitelist-form" id="whitelist-form">
+        <input type="text" class="input-text" id="whitelist-input" placeholder="misal: unesa.ac.id" required>
+        <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
+      </form>
+
+      <div class="whitelist-container">
+        <ul class="whitelist-list" id="whitelist-list">
+          <!-- Daftar entri whitelist dimuat via textContent oleh popup.js -->
+        </ul>
+        <p class="empty-state" id="whitelist-empty" style="display: none;">
+          Belum ada domain di whitelist pribadi.
+        </p>
+      </div>
+    </section>
+
+    <!-- Tab 3: Pengaturan Preset & Metrik -->
+    <section class="tab-pane" id="tab-settings" role="tabpanel">
+      <h2 class="section-title">Preset Sensitivitas Model</h2>
+      <p class="section-desc">Pilih tingkat sensitivitas deteksi Random Forest sesuai kebutuhan Anda.</p>
+
+      <div class="preset-options">
+        <label class="preset-card" for="preset-ketat">
+          <div class="preset-header">
+            <input type="radio" name="preset-choice" id="preset-ketat" value="ketat">
+            <span class="preset-name">Ketat (Ambang 0,7)</span>
+            <span class="badge-default">Default</span>
+          </div>
+          <p class="preset-summary">Direkomendasikan untuk menekan peringatan keliru pada situs yang sah.</p>
+          <div class="metric-grid">
+            <div class="metric-item">
+              <span class="metric-val">0,964</span>
+              <span class="metric-lbl">Precision</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">0,601</span>
+              <span class="metric-lbl">Recall</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">0,017</span>
+              <span class="metric-lbl">False Pos. Rate</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="preset-card" for="preset-seimbang">
+          <div class="preset-header">
+            <input type="radio" name="preset-choice" id="preset-seimbang" value="seimbang">
+            <span class="preset-name">Seimbang (Ambang 0,5)</span>
+          </div>
+          <p class="preset-summary">Mendeteksi lebih banyak indikasi phishing dengan risiko false alarm sedikit lebih tinggi.</p>
+          <div class="metric-grid">
+            <div class="metric-item">
+              <span class="metric-val">0,911</span>
+              <span class="metric-lbl">Precision</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">0,685</span>
+              <span class="metric-lbl">Recall</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">0,050</span>
+              <span class="metric-lbl">False Pos. Rate</span>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div class="note-box">
+        Catatan: Angka metrik di atas diukur pada data uji dataset, bukan pada penggunaan nyata.
+      </div>
+    </section>
+
+    <!-- Tab 4: Tab Edukasi (Literasi Digital) -->
+    <section class="tab-pane" id="tab-education" role="tabpanel">
+      <div class="education-preview">
+        <span class="edu-icon" aria-hidden="true">🎓</span>
+        <h2 class="section-title">Modul Literasi Phishing</h2>
+        <p class="section-desc">
+          Tingkatkan pemahaman literasi digital Anda tentang ciri-ciri tautan palsu, rekayasa sosial, dan uji kompetensi Anda dengan Pre-test & Post-test.
+        </p>
+
+        <button type="button" class="btn btn-primary" id="btn-open-education">
+          Buka Modul Belajar & Kuis ↗
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="popup.js"></script>
 </body>
 </html>

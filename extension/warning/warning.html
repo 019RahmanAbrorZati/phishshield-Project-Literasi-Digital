@@ -2,14 +2,60 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Peringatan PhishShield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peringatan Keamanan Situs - PhishShield</title>
+  <link rel="stylesheet" href="warning.css">
 </head>
 <body>
-  <div id="app">
-    <h1>Peringatan Risiko Situs</h1>
-    <p id="target-host"></p>
-    <p id="target-score"></p>
-  </div>
+  <main class="warning-container" role="alert" aria-live="assertive">
+    <div class="warning-card">
+      <div class="warning-badge">
+        <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>Peringatan Literasi Digital</span>
+      </div>
+
+      <h1 class="warning-title">Situs Ini Dicurigai Berbahaya</h1>
+      <p class="warning-subtitle">
+        PhishShield mendeteksi indikasi risiko phishing pada nama domain situs yang Anda tuju sebelum halaman termuat.
+      </p>
+
+      <section class="target-box">
+        <div class="target-row">
+          <span class="target-label">Alamat Hostname:</span>
+          <code class="target-value" id="target-host">-</code>
+        </div>
+        <div class="target-row">
+          <span class="target-label">Estimasi Skor Risiko:</span>
+          <span class="risk-badge" id="target-risk-badge">Menghitung...</span>
+        </div>
+      </section>
+
+      <section class="reasons-section">
+        <h2>Alasan Situs Ini Dicurigai:</h2>
+        <ul class="reasons-list" id="reasons-list">
+          <!-- Alasan dimasukkan secara aman via textContent oleh warning.js -->
+        </ul>
+      </section>
+
+      <div class="disclaimer-box" id="disclaimer-text">
+        <!-- Teks disclaimer transparansi dimuat dari explain.js -->
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" class="btn btn-primary" id="btn-back">
+          Kembali ke Tempat Aman (Direkomendasikan)
+        </button>
+        <button type="button" class="btn btn-secondary" id="btn-proceed">
+          Saya Paham Risikonya, Lanjutkan
+        </button>
+      </div>
+    </div>
+  </main>
+
   <script type="module" src="warning.js"></script>
 </body>
 </html>

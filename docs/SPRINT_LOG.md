@@ -174,5 +174,22 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Pengujian integrasi `tests/integration/navigation.test.js` dan unit `tests/unit/allowlist.test.js` lulus 100% (total 51 tes di repositori lulus).
   - Branch `feat/fase-3` di-merge ke `main`.
 
+### Sprint 4: Halaman Peringatan, Popup & Explainer
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - `extension/lib/explain.js` memetakan 16 fitur hostname ke maksimal 4 alasan berbasis bahasa awam yang terurut berdasarkan prioritas risiko, lengkap dengan teks disclaimer transparansi (indikasi vs kepastian).
+  - `tests/unit/explain.test.js` memvalidasi seluruh pemicu fitur, pembatasan 4 alasan, disclaimer, dan memastikan tidak ada klaim palsu di luar fitur model (13 tes lulus).
+  - Halaman `warning/warning.html`, `warning.css`, `warning.js` selesai dengan tampilan edukatif, aksesibel (kontras tinggi, keyboard accessible), tombol "Kembali ke tempat aman" dan tombol "Lanjutkan" (bypass sesi).
+  - Bebas celah XSS (seluruh render parameter `host` dan alasan menggunakan `textContent` / `document.createElement`, 0 `innerHTML`).
+  - Popup `popup/popup.html`, `popup.css`, `popup.js` selesai dengan 4 tab:
+    1. Status tab aktif (analisis hostname real-time, skor risiko, tombol cepat whitelist).
+    2. Manajemen Whitelist pribadi pengguna (tambah domain / wildcard `*.`, hapus, render persisten).
+    3. Pengaturan Preset (Ketat ambang 0,7 default vs Seimbang ambang 0,5) lengkap dengan tabel metrik resmi dataset dan catatan transparan.
+    4. Navigasi modul edukasi literasi phishing.
+  - Seluruh 64 tes di repositori lulus via `npm test`.
+  - Branch `feat/fase-4` di-merge ke `main`.
+
+
 
 
