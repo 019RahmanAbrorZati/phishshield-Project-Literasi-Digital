@@ -211,10 +211,26 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
           if (btnQuickWhitelist) btnQuickWhitelist.style.display = 'none';
         }
+      } else {
+        if (badgeEl) {
+          badgeEl.className = 'status-badge warning';
+          badgeEl.textContent = 'GAGAL MEMUAT';
+        }
+        if (scoreEl) scoreEl.textContent = '-';
+        if (descEl) {
+          descEl.textContent = inspectRes?.error || 'Tidak dapat memeriksa status situs.';
+        }
+        if (btnQuickWhitelist) btnQuickWhitelist.style.display = 'none';
       }
     } catch (err) {
       console.warn('Gagal memeriksa tab aktif:', err);
-      if (descEl) descEl.textContent = 'Gagal memuat status situs.';
+      if (badgeEl) {
+        badgeEl.className = 'status-badge warning';
+        badgeEl.textContent = 'GAGAL MEMUAT';
+      }
+      if (scoreEl) scoreEl.textContent = '-';
+      if (descEl) descEl.textContent = err?.message || 'Gagal memuat status situs.';
+      if (btnQuickWhitelist) btnQuickWhitelist.style.display = 'none';
     }
   }
 

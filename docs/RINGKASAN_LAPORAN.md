@@ -68,7 +68,7 @@ Rincian modul implementasi untuk Bab VI:
    - Menggunakan `Math.fround` (float32) untuk menyamakan presisi batas pemisahan node scikit-learn.
    - Mengagregasi probabilitas kelas positif dari seluruh pohon dan membandingkannya dengan ambang preset.
 3. **Allowlist Bawaan Heuristik (`extension/lib/allowlist.js`)**:
-   - 35 domain resmi populer di Indonesia (KlikBCA, BCA, Mandiri, BNI, BRI, Tokopedia, Shopee, DJP, Pajak, Detik, Kompas, dsb) dan global (Google, Microsoft, Apple, GitHub, Wikipedia, dsb).
+   - 41 domain resmi populer di Indonesia (KlikBCA, BCA, Mandiri, BNI, BRI, Tokopedia, Seller Tokopedia, Shopee, DJP, Pajak, Detik, Kompas, dsb) dan global (Google, Colab, Classroom, Microsoft, Microsoft Login, Teams, Apple, GitHub, Telegram, Wikipedia, dsb).
    - Aturan pencocokan ketat: *exact match* dan *dot-bounded wildcard* `*.` (mencegah eksploitasi akhiran domain seperti `google.com.attacker.xyz`).
    - Larangan keras terhadap platform penampung konten pengguna (*user-content platforms* seperti `docs.google.com`, `sites.google.com`, `github.io`, `web.app`).
 4. **Modul Penjelas Alasan Edukatif (`extension/lib/explain.js`)**:
@@ -194,7 +194,7 @@ Langkah-langkah praktis yang perlu Anda lakukan untuk melengkapi naskah laporan 
   - Buka popup dan ambil tangkapan layar untuk 4 tab: **Tab Status**, **Tab Whitelist**, **Tab Pengaturan**, dan **Tab Edukasi**.
   - Buka halaman peringatan dengan membuka tautan pengujian (misal `http://login-verifikasi-bca.top` atau langsung `chrome-extension://<ID>/warning/warning.html?host=login-verifikasi-bca.top&score=0.92`) dan ambil tangkapan layar antarmuka peringatan.
   - Buka modul edukasi `chrome-extension://<ID>/education/education.html` dan ambil tangkapan layar materi serta kuis interaktif.
-  - Masukkan tangkapan layar tersebut ke Bab Implementasi sesuai penanda di [USER_GUIDE.md](file:///c:/Users/rahma/OneDrive/Documents/SEMESTER%205/MATKUL/LD/FINAL%20PROJECT/docs/USER_GUIDE.md).
+  - Masukkan tangkapan layar tersebut ke Bab Implementasi sesuai penanda di [USER_GUIDE.md](./USER_GUIDE.md).
 
 - [ ] **2. Melakukan Uji Coba Pengguna (*User Testing*) / Eksperimen Literasi**:
   - Bagikan modul kuis (Pre-Test dan Post-Test) kepada sejumlah rekan mahasiswa/responden.

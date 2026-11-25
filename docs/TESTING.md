@@ -36,7 +36,7 @@ node --test
 
 ## 3. Ringkasan Hasil Pengujian Otomatis
 
-Seluruh suite pengujian otomatis dijalankan pada lingkungan **Node.js LTS (v24.x)**:
+Seluruh suite pengujian otomatis dijalankan pada lingkungan **Node.js (>= 18.0.0, direkomendasikan Node.js LTS)**:
 
 | Modul Pengujian | Berkas Uji | Jumlah Tes | Status | Keterangan Cakupan |
 |---|---|---|---|---|
@@ -47,10 +47,12 @@ Seluruh suite pengujian otomatis dijalankan pada lingkungan **Node.js LTS (v24.x
 | Kuis & CSV | `tests/unit/quiz.test.js` | 10 | **LULUS** | Struktur 10 pre & 10 post bank soal, scoring proporsional, format ekspor CSV. |
 | Skrip Agregator | `tests/unit/gabung_hasil.test.js` | 7 | **LULUS** | Penggabungan multi-file, penanganan CSV kosong, duplikasi ID, dan hitung gain. |
 | Aturan DOM (Opsional) | `tests/unit/page_rules.test.js` | 5 | **LULUS** | Evaluasi HTML fixture (safe vs phishing), password input, cross-domain form, hidden iframe. |
+| Audit Keamanan Statis | `tests/unit/security_audit.test.js` | 11 | **LULUS** | 0 fetch/XHR, 0 eval, CSP ketat, anti-XSS, integritas allowlist & privasi. |
+| Packaging Distribusi | `tests/unit/build_zip.test.js` | 2 | **LULUS** | Verifikasi pembuatan paket distribusi ZIP PKZIP & kelengkapan file ekstensi. |
 | Integrasi SW & Navigasi | `tests/integration/navigation.test.js` | 11 | **LULUS** | Frame filter (frameId 0), pengalihan risiko, allowlist bypass, session bypass, preset test. |
 | Integrasi Alur Penuh | `tests/integration/e2e_flow.test.js` | 4 | **LULUS** | URL $\rightarrow$ Fitur $\rightarrow$ Prediksi $\rightarrow$ Keputusan $\rightarrow$ Alasan secara end-to-end. |
 | Tes Kewajaran Situs Sah | `tests/integration/legit_hosts.test.js` | 1 | **LULUS** | Evaluasi 50 situs sah pada preset Seimbang (0,5) vs Ketat (0,7). |
-| **TOTAL** | **10 Berkas Uji** | **91** | **LULUS (100%)** | **0 Gagal, 0 Dibatalkan, 0 Dilewati.** |
+| **TOTAL** | **12 Berkas Uji** | **104** | **LULUS (100%)** | **0 Gagal, 0 Dibatalkan, 0 Dilewati.** |
 
 ---
 
@@ -67,9 +69,9 @@ Pengujian ini dijalankan pada berkas `tests/fixtures/legit_hosts.json` untuk men
 | Hostname Sah | Kategori | Skor Model | Ditandai Seimbang (0,5)? | Ditandai Ketat (0,7)? | Analisis Penyebab & Mitigasi |
 |---|---|---|---|---|---|
 | `ocbc.id` | Perbankan | **0,6609** | **YA (False Alarm)** | **TIDAK (Aman)** | Nama domain sangat pendek (4 karakter) dengan TLD `.id` memicu bobot probabilitas menengah. Terbukti bahwa **Preset Ketat (0,7) berhasil menekan false alarm ini**. |
-| `seller.tokopedia.com` | E-Commerce | **0,8439** | **YA (False Alarm)** | **YA (False Alarm)** | Memiliki subdomain (`seller`) dan kata kunci bisnis yang memicu pola risiko pada model murni. Di dunia nyata, domain ini aman karena domain dasar `tokopedia.com` tercakup dalam **Allowlist Bawaan** atau dapat dimasukkan pengguna via `*.tokopedia.com`. |
+| `seller.tokopedia.com` | E-Commerce | **0,8439** | **YA (False Alarm)** | **YA (False Alarm)** | Memiliki subdomain (`seller`) dan kata kunci yang memicu pola risiko pada model murni. Karena allowlist bawaan menerapkan pencocokan persis (*exact match*), domain ini kini telah ditambahkan secara eksplisit ke **Allowlist Bawaan** untuk menjamin pengguna tidak terganggu (sementara pengujian `legit_hosts.test.js` tetap mengevaluasi model murni tanpa bantuan allowlist). Pengguna juga dapat memasukkan pola wildcard `*.tokopedia.com` pada Whitelist pribadi. |
 
-> **Kesimpulan Ilmiah:** Hasil pengujian ini membuktikan secara empiris bahwa keputusan desain menghadirkan **Allowlist Bawaan** dan menetapkan **Preset Ketat (0,7) sebagai default** sangat tepat dan krusial guna melindungi pengalaman pengguna situs sah di Indonesia.
+> **Kesimpulan Ilmiah:** Hasil pengujian pada 50 sampel situs sah ini memberikan indikasi empiris awal bahwa keputusan menghadirkan **Allowlist Bawaan** dan menetapkan **Preset Ketat (0,7) sebagai default** berperan penting dalam menekan potensi positif palsu (*false positive*) pada domain sah populer di Indonesia.
 
 ---
 

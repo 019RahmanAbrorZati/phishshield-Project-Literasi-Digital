@@ -195,7 +195,7 @@ Repositori ini menyediakan skrip CLI berbasis Node.js untuk menggabungkan file-f
 ## 8. Tanya Jawab & Pemecahan Masalah (FAQ)
 
 ### T: Mengapa situs perbankan resmi seperti KlikBCA atau DJP Online tidak terblokir?
-**J:** PhishShield menyertakan *Allowlist Bawaan* yang memuat 35 domain resmi perbankan, instansi pemerintah, dan platform teknologi terpercaya di Indonesia dan global. Domain-domain ini diperiksa terlebih dahulu sebelum model dieksekusi untuk memastikan kelancaran aktivitas harian pengguna.
+**J:** PhishShield menyertakan *Allowlist Bawaan* yang memuat 41 domain resmi perbankan, instansi pemerintah, dan platform teknologi terpercaya di Indonesia dan global. Domain-domain ini diperiksa terlebih dahulu sebelum model dieksekusi untuk memastikan kelancaran aktivitas harian pengguna.
 
 ### T: Bagaimana jika situs kampus atau portal internal kantor saya terindikasi phishing?
 **J:** Anda dapat menambahkan domain tersebut ke **Whitelist Pribadi** melalui tab Whitelist pada popup. Setelah ditambahkan, PhishShield tidak akan pernah memblokir alamat tersebut.

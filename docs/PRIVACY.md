@@ -44,7 +44,7 @@ Rincian entitas data lokal:
 2. **Whitelist Pribadi Pengguna (`userWhitelist`)**:
    - Daftar hostname atau pola wildcard (`*.domain.com`) yang ditambahkan secara manual oleh pengguna agar tidak diperiksa oleh model.
 3. **Pengecualian Sesi Sementara (`sessionBypass`)**:
-   - Daftar hostname yang diizinkan sementara setelah pengguna memilih opsi *"Tetap Lanjutkan (Sesi Ini)"* pada halaman peringatan.
+   - Daftar hostname yang diizinkan sementara setelah pengguna memilih opsi *"Tetap Lanjutkan (Sesi Ini)"* pada halaman peringatan. Disimpan pada penyimpanan sesi peramban (`chrome.storage.session`) dan otomatis terhapus saat seluruh jendela peramban ditutup. Karena desain privasi PhishShield tidak pernah menyimpan atau meneruskan path maupun query URL asli ke halaman peringatan (`warning.html?host=...&score=...`), tombol lanjutkan selalu mengarahkan pengguna ke root protokol aman `https://${host}`.
 4. **Hasil Pre-Test & Post-Test Literasi (`resp_<timestamp>_<uuid>`)**:
    - Catatan pengerjaan kuis edukasi yang bersifat **anonim** (berisi pengenal acak UUID, mode pre/post, skor, jumlah jawaban benar, dan stempel waktu). Data ini dapat diekspor pengguna ke file CSV lokal untuk keperluan laporan studi literasi digital.
 

@@ -5,6 +5,7 @@ import {
   handleNavigation,
   shouldInspectNavigation,
   getStorageState,
+  setSessionBypass,
   PRESETS
 } from '../../extension/background/service_worker.js';
 
@@ -41,11 +42,14 @@ class MockChromeStorage {
 
 describe('Integrasi Service Worker & Pemeriksaan Navigasi (Fase 3)', () => {
   let mockStorage;
+  let mockSessionStorage;
   let tabUpdates = [];
 
-  beforeEach(() => {
+  beforeEach(async () => {
     mockStorage = new MockChromeStorage();
+    mockSessionStorage = new MockChromeStorage();
     tabUpdates = [];
+    await setSessionBypass([]);
 
     globalThis.chrome = {
       runtime: {
@@ -53,7 +57,8 @@ describe('Integrasi Service Worker & Pemeriksaan Navigasi (Fase 3)', () => {
         getURL: path => `chrome-extension://mock-phishshield-id/${path}`
       },
       storage: {
-        local: mockStorage
+        local: mockStorage,
+        session: mockSessionStorage
       },
       tabs: {
         update: async (tabId, props) => {
@@ -68,8 +73,9 @@ describe('Integrasi Service Worker & Pemeriksaan Navigasi (Fase 3)', () => {
     };
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     delete globalThis.chrome;
+    await setSessionBypass([]);
   });
 
   describe('Filter Navigasi (shouldInspectNavigation)', () => {
@@ -174,7 +180,7 @@ describe('Integrasi Service Worker & Pemeriksaan Navigasi (Fase 3)', () => {
 
     it('Host berbahaya dengan Bypass Sesi Aktif TIDAK dialihkan', async () => {
       // Simulasikan pengguna telah menekan tombol "Lanjutkan" di halaman warning
-      await mockStorage.set({
+      await mockSessionStorage.set({
         sessionBypass: ['klikbca-verifikasi-akun-secure.web.app']
       });
 

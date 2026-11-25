@@ -9,6 +9,7 @@
 import { hostOf, hostFeatures } from '../lib/features.js';
 import { DEFAULT_ALLOWLIST, isAllowed } from '../lib/allowlist.js';
 import { predictProba } from '../lib/rf.js';
+import MODEL from '../lib/model_data.js';
 
 // Ambang batas preset
 export const PRESETS = {
@@ -18,37 +19,66 @@ export const PRESETS = {
 
 export const DEFAULT_PRESET = 'ketat';
 
-// Cache in-memory untuk model (lazy loading)
-let cachedModel = null;
+// Fallback in-memory jika chrome.storage.session tidak tersedia (misal di Node.js / unit test)
+let memorySessionBypass = [];
 
 /**
- * Memuat model Random Forest secara lazy dari model_data.js.
- * @returns {Promise<object>} Objek model Random Forest
+ * Mendapatkan daftar hostname yang dibypass untuk sesi saat ini.
+ * Menggunakan chrome.storage.session (terhapus otomatis saat peramban ditutup).
+ * @returns {Promise<string[]>}
  */
-export async function getModel() {
-  if (cachedModel) {
-    return cachedModel;
+export async function getSessionBypass() {
+  if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.session) {
+    try {
+      const res = await chrome.storage.session.get({ sessionBypass: [] });
+      return Array.isArray(res.sessionBypass) ? res.sessionBypass : [];
+    } catch {
+      return memorySessionBypass;
+    }
   }
-  const module = await import('../lib/model_data.js');
-  cachedModel = module.default || module.MODEL;
-  return cachedModel;
+  return memorySessionBypass;
 }
 
 /**
- * Membaca pengaturan aktif dari chrome.storage.local.
+ * Memperbarui daftar hostname yang dibypass untuk sesi saat ini.
+ * @param {string[]} list
+ */
+export async function setSessionBypass(list) {
+  memorySessionBypass = Array.isArray(list) ? list : [];
+  if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.session) {
+    try {
+      await chrome.storage.session.set({ sessionBypass: memorySessionBypass });
+    } catch {
+      // tetap aman di memorySessionBypass
+    }
+  }
+}
+
+/**
+ * Memuat model Random Forest dari model_data.js (Static Import).
+ * @returns {Promise<object>} Objek model Random Forest
+ */
+export async function getModel() {
+  return MODEL;
+}
+
+/**
+ * Membaca pengaturan aktif dari chrome.storage.local dan sessionBypass dari chrome.storage.session.
  * @returns {Promise<{ preset: string, threshold: number, userWhitelist: string[], sessionBypass: string[] }>}
  */
 export async function getStorageState() {
   const defaults = {
     preset: DEFAULT_PRESET,
-    userWhitelist: [],
-    sessionBypass: []
+    userWhitelist: []
   };
+
+  const sessionBypass = await getSessionBypass();
 
   if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.local) {
     return {
       ...defaults,
-      threshold: PRESETS[DEFAULT_PRESET]
+      threshold: PRESETS[DEFAULT_PRESET],
+      sessionBypass
     };
   }
 
@@ -60,7 +90,7 @@ export async function getStorageState() {
     preset: activePreset,
     threshold,
     userWhitelist: Array.isArray(data.userWhitelist) ? data.userWhitelist : [],
-    sessionBypass: Array.isArray(data.sessionBypass) ? data.sessionBypass : []
+    sessionBypass
   };
 }
 
@@ -160,11 +190,10 @@ if (typeof chrome !== 'undefined' && chrome.webNavigation && chrome.webNavigatio
   // Inisialisasi storage saat ekstensi dipasang / diperbarui
   if (chrome.runtime && chrome.runtime.onInstalled) {
     chrome.runtime.onInstalled.addListener(async () => {
-      const current = await chrome.storage.local.get(['preset', 'userWhitelist', 'sessionBypass']);
+      const current = await chrome.storage.local.get(['preset', 'userWhitelist']);
       const updates = {};
       if (!current.preset) updates.preset = DEFAULT_PRESET;
       if (!Array.isArray(current.userWhitelist)) updates.userWhitelist = [];
-      if (!Array.isArray(current.sessionBypass)) updates.sessionBypass = [];
       if (Object.keys(updates).length > 0) {
         await chrome.storage.local.set(updates);
       }
@@ -202,9 +231,9 @@ if (typeof chrome !== 'undefined' && chrome.webNavigation && chrome.webNavigatio
           } else if (message.action === 'addSessionBypass') {
             const hostToBypass = String(message.host || '').toLowerCase().trim();
             if (hostToBypass) {
-              const state = await getStorageState();
-              const list = Array.from(new Set([...state.sessionBypass, hostToBypass]));
-              await chrome.storage.local.set({ sessionBypass: list });
+              const currentBypass = await getSessionBypass();
+              const list = Array.from(new Set([...currentBypass, hostToBypass]));
+              await setSessionBypass(list);
               sendResponse({ success: true, sessionBypass: list });
             } else {
               sendResponse({ success: false, error: 'Host kosong' });

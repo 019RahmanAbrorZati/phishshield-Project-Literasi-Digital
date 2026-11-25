@@ -18,7 +18,7 @@ flowchart TD
         end
 
         subgraph Core_Libraries["Pustaka Logika Murni (extension/lib/)"]
-            AL["allowlist.js & allowlist.json<br/>- 35 Domain Bawaan<br/>- Exact Match & Wildcard *. "]
+            AL["allowlist.js & allowlist.json<br/>- 41 Domain Bawaan<br/>- Exact Match & Wildcard *. "]
             FE["features.js & meta.js<br/>- Normalisasi URL (hostOf)<br/>- Ekstraksi 16 Fitur Hostname<br/>- Entropi Shannon"]
             RF["rf.js & model_data.js<br/>- Evaluasi 60 Pohon Keputusan<br/>- Presisi Float32 (Math.fround)<br/>- Agregasi Probabilitas"]
             EX["explain.js<br/>- Pemetaan Fitur ke Bahasa Awam<br/>- Batas Maksimal 4 Alasan<br/>- Disclaimer Indikasi Risiko"]
@@ -79,6 +79,9 @@ flowchart TD
     PresetCheck -- Ya (Terindikasi Risiko) --> Redirect[Alihkan ke Halaman Peringatan<br/>warning.html?host=...&score=...]
     Redirect --> WarningView[Render Alasan Edukatif<br/>via explain.js]
 ```
+
+### Catatan Desain Privasi & Protokol Lanjut (Session Bypass)
+Sesuai prinsip privasi *Zero Network Footprint* dan *Minimal Data Exposure*, ekstensi sengaja tidak menyimpan atau meneruskan URL lengkap (jalur *path* dan parameter *query*) ke halaman peringatan `warning.html` (hanya parameter `warning.html?host=...&score=...`). Jika pengguna memilih tombol *"Tetap Lanjutkan (Sesi Ini)"*, hostname tersebut disimpan dalam penyimpanan sesi peramban (`chrome.storage.session`, yang otomatis terhapus saat peramban ditutup), dan pengguna diarahkan ke root alamat menggunakan protokol aman `https://${host}` tanpa menyimpan riwayat penelusuran spesifik pengguna.
 
 ---
 

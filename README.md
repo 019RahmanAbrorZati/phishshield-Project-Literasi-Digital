@@ -22,7 +22,7 @@ Proyek ini dikembangkan sebagai karya tugas akhir (Capstone Project) mahasiswa T
    - **Ketat (Ambang 0,7 - Default)**: Meminimalkan peringatan keliru (*false positive rate* hanya 1,7%).
    - **Seimbang (Ambang 0,5)**: Deteksi lebih sensitif untuk lingkungan belajar atau pengujian.
 5. **Allowlist Bawaan & Whitelist Pengguna**:
-   - Dilengkapi allowlist bawaan berisi 35 domain layanan publik dan perbankan populer di Indonesia dan global.
+   - Dilengkapi allowlist bawaan berisi 41 domain layanan publik, produktivitas, dan perbankan populer di Indonesia dan global.
    - Pengguna dapat menambahkan domain terpercaya secara fleksibel melalui tab Whitelist di popup (mendukung *exact domain* dan wildcard `*.domain.com`).
 6. **Modul Pembelajaran Literasi Digital & Kuis Pre/Post-Test**:
    - Memuat 5 topik materi literasi phishing: anatomi URL, manipulasi homograf/typosquatting, bahaya subdomain gratis & Dynamic DNS, teknik verifikasi hover tautan, dan mitigasi darurat saat terjebak phishing.
@@ -89,7 +89,7 @@ phishshield/
 │  │  ├─ rf.js                  # Mesin inferensi Random Forest (Float32)
 │  │  ├─ explain.js             # Pemetaan fitur ke alasan bahasa awam
 │  │  ├─ allowlist.js           # Logika pencocokan exact & wildcard domain
-│  │  ├─ allowlist.json         # 35 domain sah terverifikasi awal
+│  │  ├─ allowlist.json         # 41 domain sah terverifikasi awal
 │  │  ├─ meta.json              # Daftar fitur dan konstanta kamus kata kunci
 │  │  ├─ meta.js                # ES wrapper konstanta meta
 │  │  ├─ model_data.js          # ES wrapper model pohon keputusan

@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Gagal menyimpan bypass sesi:', err);
       }
 
-      // Alihkan pengguna ke situs tujuan (default https, fallback http)
-      window.location.href = `http://${host}`;
+      // Alihkan pengguna ke situs tujuan (menggunakan protokol aman https)
+      window.location.href = `https://${host}`;
     });
   }
 });

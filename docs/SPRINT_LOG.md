@@ -285,6 +285,22 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Branch `feat/fase-11` di-merge ke `main`.
   - Seluruh fase pengembangan (Fase 0 hingga Fase 11) telah tuntas diselesaikan secara komprehensif, rapi, dan terdokumentasi.
 
+### Sprint 12: Perbaikan Menyeluruh Service Worker, Session Bypass, Popup & Dokumentasi
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - Memperbaiki dynamic import pada `service_worker.js`: mengganti `await import('../lib/model_data.js')` dengan static import `import MODEL from '../lib/model_data.js';` di scope atas berkas, mencegah galat `ServiceWorkerGlobalScope` pada Chrome MV3.
+  - Memindahkan penyimpanan `sessionBypass` dari `chrome.storage.local` ke `chrome.storage.session` dengan fallback array in-memory, sehingga daftar bypass per sesi benar-benar terhapus saat peramban ditutup.
+  - Memperbarui tombol aksi `btn-proceed` di `warning.js` agar mengarahkan pengguna ke root HTTPS (`https://${host}`).
+  - Menambahkan penanganan error di `popup.js` (`initActiveTabStatus`): menampilkan status "GAGAL MEMUAT", skor "-", dan deskripsi error saat `inspectUrl` gagal atau tidak mengembalikan response.
+  - Memperbarui label versi di header `popup.html` menjadi `v1.0.0 • Klien Murni`.
+  - Menambahkan 6 subdomain layanan resmi ke Allowlist Bawaan (`allowlist.json` & `allowlist.js`): `colab.research.google.com`, `classroom.google.com`, `login.microsoftonline.com`, `teams.microsoft.com`, `seller.tokopedia.com`, dan `t.me` (total 41 domain terverifikasi).
+  - Memperbaiki klaim analisis `seller.tokopedia.com`, memperhalus kalimat kesimpulan ilmiah, memperbarui tabel rekapitulasi pengujian (12 berkas / 104 tes), dan menyelaraskan versi Node.js di `docs/TESTING.md`.
+  - Mengubah tautan absolut Windows di `docs/RINGKASAN_LAPORAN.md` menjadi tautan relatif `./USER_GUIDE.md`.
+  - Mendokumentasikan protokol navigasi bypass sesi HTTPS di `docs/ARCHITECTURE.md` dan `docs/PRIVACY.md`.
+  - Seluruh 104 tes lulus 100% dan berkas distribusi `dist/phishshield-v1.0.0.zip` berhasil diperbarui.
+  - Branch `fix/revisi-menyeluruh` di-merge ke `main`.
+
 
 
 
