@@ -1,0 +1,24 @@
+# Node & dependensi
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Berkas Operasi Sistem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Output Build & Distribusi
+dist/
+*.zip
+
+# Direktori Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test coverage & logs
+coverage/
+*.log

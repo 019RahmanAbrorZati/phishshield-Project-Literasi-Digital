@@ -1,0 +1,18 @@
+{
+  "name": "phishshield",
+  "version": "0.1.0",
+  "description": "Ekstensi Chrome pemeriksa hostname berbasis Random Forest klien untuk literasi digital phishing",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "keywords": [
+    "phishing-detection",
+    "chrome-extension",
+    "random-forest",
+    "client-side",
+    "digital-literacy"
+  ],
+  "author": "Mahasiswa Teknik Informatika - Capstone Literasi Digital",
+  "license": "MIT"
+}

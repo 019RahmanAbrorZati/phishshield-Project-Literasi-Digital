@@ -1,0 +1,86 @@
+[
+  {
+    "url": "https://www.bca.co.id",
+    "features": {
+      "host_len": 9,
+      "n_labels": 3,
+      "n_subdomains": 0,
+      "n_dots": 2,
+      "n_hyphens": 0,
+      "n_digits": 0,
+      "digit_ratio": 0.0,
+      "longest_label": 3,
+      "tld_len": 2,
+      "is_ip": 0,
+      "has_punycode": 0,
+      "is_free_hosting": 0,
+      "is_dynamic_dns": 0,
+      "risky_tld": 0,
+      "n_sensitive_kw": 0,
+      "entropy": 2.725480556997868
+    }
+  },
+  {
+    "url": "http://klikbca-verifikasi-akun-secure.web.app",
+    "features": {
+      "host_len": 38,
+      "n_labels": 3,
+      "n_subdomains": 1,
+      "n_dots": 2,
+      "n_hyphens": 3,
+      "n_digits": 0,
+      "digit_ratio": 0.0,
+      "longest_label": 30,
+      "tld_len": 3,
+      "is_ip": 0,
+      "has_punycode": 0,
+      "is_free_hosting": 1,
+      "is_dynamic_dns": 0,
+      "risky_tld": 0,
+      "n_sensitive_kw": 3,
+      "entropy": 3.9122725791761255
+    }
+  },
+  {
+    "url": "http://103.45.67.89",
+    "features": {
+      "host_len": 12,
+      "n_labels": 4,
+      "n_subdomains": 0,
+      "n_dots": 3,
+      "n_hyphens": 0,
+      "n_digits": 9,
+      "digit_ratio": 0.75,
+      "longest_label": 3,
+      "tld_len": 2,
+      "is_ip": 1,
+      "has_punycode": 0,
+      "is_free_hosting": 0,
+      "is_dynamic_dns": 0,
+      "risky_tld": 0,
+      "n_sensitive_kw": 0,
+      "entropy": 3.188721875540867
+    }
+  },
+  {
+    "url": "https://login.secure-update.example.com/path?x=1",
+    "features": {
+      "host_len": 31,
+      "n_labels": 4,
+      "n_subdomains": 2,
+      "n_dots": 3,
+      "n_hyphens": 1,
+      "n_digits": 0,
+      "digit_ratio": 0.0,
+      "longest_label": 13,
+      "tld_len": 3,
+      "is_ip": 0,
+      "has_punycode": 0,
+      "is_free_hosting": 0,
+      "is_dynamic_dns": 0,
+      "risky_tld": 0,
+      "n_sensitive_kw": 3,
+      "entropy": 3.974695407915898
+    }
+  }
+]
