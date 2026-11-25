@@ -191,7 +191,3 @@ Jika Anda melakukan pengujian literasi pada sekelompok pengguna/responden:
    - Menghitung peningkatan nilai (*gain*) dan mencetak ringkasan statistik ke terminal.
 
 ---
-
-## 📄 Lisensi & Hak Cipta
-
-Proyek ini dikembangkan untuk tujuan edukasi dan riset akademis dalam mata kuliah Capstone Project Teknik Informatika. Kode sumber terbuka untuk dipelajari dan dikembangkan dengan tetap mencantumkan atribusi pengembang.
