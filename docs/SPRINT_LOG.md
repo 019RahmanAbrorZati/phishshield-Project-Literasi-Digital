@@ -270,6 +270,21 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Rangkaian pengujian bertambah dari 102 menjadi 104 tes (seluruh 104 tes lulus 100% via `npm test`).
   - Branch `feat/fase-10` di-merge ke `main`, dilanjutkan pembuatan tag Git `v1.0.0`.
 
+### Sprint 11: Verifikasi Akhir & Ringkasan Laporan Capstone
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - Verifikasi menyeluruh seluruh alur kerja proyek: rangkaian 104 pengujian unit dan integrasi lulus 100% via `npm test` (durasi ~450 ms), serta pembuatan paket rilis zip `dist/phishshield-v1.0.0.zip` (ukuran 799,66 KB) via `npm run build`.
+  - Penyusunan dokumen `docs/RINGKASAN_LAPORAN.md` yang memetakan seluruh implementasi teknis dan luaran proyek ke dalam bab-bab laporan skripsi capstone:
+    - Bab IV: Perancangan Arsitektur Sistem (MV3, Zero Network Footprint, local storage, diagram alur).
+    - Bab VI: Implementasi Perangkat Lunak (ekstraksi 16 fitur hostname, inferensi RF float32, allowlist bawaan, penjelas alasan awam, halaman peringatan & popup, modul literasi digital 5 materi + pre/post-test 10 soal, ekspor CSV, skrip CLI agregasi `gabung_hasil.js`, dan inspeksi elemen DOM lokal).
+    - Bab VII: Pengujian Fungsional, Integrasi & Analisis Performa (tabel 104 tes terotomatisasi, validasi 300 data golden predictions, benchmark kecepatan ~5,8 µs per URL, uji empiris 50 situs sah, dan tabel metrik resmi dataset F1 0,782).
+    - Bab VIII: Analisis Keamanan & Privasi (audit kode 0 fetch/0 XHR/0 eval/0 innerHTML, CSP ketat, tabel justifikasi izin minimal).
+    - Bab Keterbatasan & Saran Pengembangan (6 keterbatasan jujur dan rekomendasi pengembangan).
+    - Checklist Aksi Mandiri untuk Mahasiswa (panduan tangkapan layar, eksperimen responden, pengisian template laporan, dan penyediaan paket penguji).
+  - Branch `feat/fase-11` di-merge ke `main`.
+  - Seluruh fase pengembangan (Fase 0 hingga Fase 11) telah tuntas diselesaikan secara komprehensif, rapi, dan terdokumentasi.
+
 
 
 
