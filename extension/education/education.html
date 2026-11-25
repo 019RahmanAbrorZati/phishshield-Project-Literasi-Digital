@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modul Edukasi Literasi Phishing - PhishShield</title>
+  <link rel="stylesheet" href="education.css">
+</head>
+<body>
+  <div class="edu-app">
+    <!-- Top Bar -->
+    <header class="edu-header">
+      <div class="edu-brand">
+        <span class="edu-logo-icon" aria-hidden="true">🛡️</span>
+        <div>
+          <h1 class="edu-app-title">PhishShield Literasi Digital</h1>
+          <span class="edu-app-subtitle">Modul Edukasi & Evaluasi Pre-Test / Post-Test</span>
+        </div>
+      </div>
+      <div class="respondent-badge">
+        <span class="resp-label">ID Responden Anonim:</span>
+        <code class="resp-id" id="display-resp-id">Memuat...</code>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="edu-nav" role="tablist">
+      <button class="edu-tab-btn active" data-target="pane-modules" role="tab" aria-selected="true" id="tab-btn-modules">
+        📖 5 Materi Edukasi
+      </button>
+      <button class="edu-tab-btn" data-target="pane-pretest" role="tab" aria-selected="false" id="tab-btn-pretest">
+        📝 Pre-Test
+      </button>
+      <button class="edu-tab-btn" data-target="pane-posttest" role="tab" aria-selected="false" id="tab-btn-posttest">
+        🎯 Post-Test
+      </button>
+      <button class="edu-tab-btn" data-target="pane-results" role="tab" aria-selected="false" id="tab-btn-results">
+        📊 Hasil & Ekspor CSV
+      </button>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="edu-content">
+      <!-- PANE 1: 5 Materi Edukasi -->
+      <section class="edu-pane active" id="pane-modules" role="tabpanel">
+        <div class="intro-card">
+          <h2>Selamat Datang di Modul Literasi Keamanan Hostname</h2>
+          <p>
+            Phishing adalah upaya manipulasi psikologis untuk mencuri data sensitif (kata sandi, nomor kartu kredit, PIN)
+            dengan cara menyamarkan diri sebagai pihak resmi. Pelajari 5 materi singkat di bawah ini sebelum mengerjakan Post-Test!
+          </p>
+        </div>
+
+        <div class="modules-grid">
+          <!-- Modul 1 -->
+          <article class="module-card">
+            <div class="module-num">01</div>
+            <h3 class="module-title">Ciri-ciri Struktur Hostname Phishing</h3>
+            <p class="module-text">
+              Perhatikan nama domain di bilah alamat peramban (address bar). Penipu sering menggunakan nama domain yang sangat panjang,
+              banyak tanda hubung (<code>klikbca-layanan-verifikasi-nasabah.com</code>), atau bahkan memakai alamat IP numerik langsung
+              (<code>http://103.25.76.12/</code>). Bank dan instansi resmi tidak pernah menggunakan alamat IP numerik untuk halaman nasabah.
+            </p>
+          </article>
+
+          <!-- Modul 2 -->
+          <article class="module-card">
+            <div class="module-num">02</div>
+            <h3 class="module-title">Typosquatting & Serangan Homograf (Punycode)</h3>
+            <p class="module-text">
+              <strong>Typosquatting</strong> memanfaatkan salah ketik yang disengaja (misal: <code>paypa1.com</code> atau <code>tokopedla.com</code>).
+              Sementara itu, <strong>serangan homograf</strong> memakai karakter non-Latin yang berawalan <code>xn--</code> (Punycode) sehingga tampak
+              identik dengan huruf alfabet biasa (misal huruf sirilik 'а' yang menyerupai 'a').
+            </p>
+          </article>
+
+          <!-- Modul 3 -->
+          <article class="module-card">
+            <div class="module-num">03</div>
+            <h3 class="module-title">Hosting Gratis & Dynamic DNS</h3>
+            <p class="module-text">
+              Penipu menyukai subdomain dari platform hosting gratis (<code>web.app</code>, <code>firebaseapp.com</code>, <code>pages.dev</code>)
+              dan penyedia Dynamic DNS (<code>duckdns.org</code>, <code>ddns.net</code>). Siapa pun dapat mendaftar tanpa verifikasi identitas,
+              sehingga situs seperti <code>bca-update.web.app</code> bukanlah milik bank, melainkan subdomain buatan penipu.
+            </p>
+          </article>
+
+          <!-- Modul 4 -->
+          <article class="module-card">
+            <div class="module-num">04</div>
+            <h3 class="module-title">Cara Memeriksa Tautan Sebelum Mengklik</h3>
+            <p class="module-text">
+              Arahkan kursor (*hover*) ke tautan sebelum mengklik untuk melihat alamat URL tujuan yang sebenarnya di sudut kiri bawah layar.
+              Baca nama domain dari kanan ke kiri sebelum tanda garis miring (<code>/</code>). Ingat bahwa keberadaan sertifikat HTTPS (gembok terkunci)
+              hanya mengenkripsi data, bukan membuktikan pemilik situs aman.
+            </p>
+          </article>
+
+          <!-- Modul 5 -->
+          <article class="module-card">
+            <div class="module-num">05</div>
+            <h3 class="module-title">Langkah Darurat Jika Terlanjur Memasukkan Data</h3>
+            <p class="module-text">
+              Jika Anda menyadari telah memasukkan kredensial di situs palsu:
+              <strong>1) Segera ganti kata sandi</strong> akun Anda di situs resmi asli;
+              <strong>2) Aktifkan Two-Factor Authentication (2FA)</strong>;
+              <strong>3) Hubungi pusat panggilan resmi (call center)</strong> bank/layanan terkait untuk memblokir transaksi darurat.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- PANE 2: Pre-Test -->
+      <section class="edu-pane" id="pane-pretest" role="tabpanel">
+        <div class="quiz-container" id="quiz-pretest-container">
+          <!-- Quiz pretest dinamis dimasukkan oleh education.js -->
+        </div>
+      </section>
+
+      <!-- PANE 3: Post-Test -->
+      <section class="edu-pane" id="pane-posttest" role="tabpanel">
+        <div class="quiz-container" id="quiz-posttest-container">
+          <!-- Quiz posttest dinamis dimasukkan oleh education.js -->
+        </div>
+      </section>
+
+      <!-- PANE 4: Hasil & Ekspor CSV -->
+      <section class="edu-pane" id="pane-results" role="tabpanel">
+        <div class="results-overview">
+          <h2>Ringkasan Hasil Literasi Digital</h2>
+          <p class="section-desc">
+            Data evaluasi pre-test dan post-test disimpan secara anonim di penyimpanan lokal peramban Anda.
+          </p>
+
+          <div class="stats-summary-grid">
+            <div class="stat-card">
+              <span class="stat-title">Rata-rata Pre-Test</span>
+              <span class="stat-value" id="stat-avg-pre">-</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-title">Rata-rata Post-Test</span>
+              <span class="stat-value" id="stat-avg-post">-</span>
+            </div>
+            <div class="stat-card highlight">
+              <span class="stat-title">Peningkatan (Gain)</span>
+              <span class="stat-value" id="stat-gain">-</span>
+            </div>
+          </div>
+
+          <div class="export-actions">
+            <button type="button" class="btn btn-primary" id="btn-export-csv">
+              📥 Ekspor Hasil ke CSV (Untuk Laporan Riset)
+            </button>
+            <button type="button" class="btn btn-outline" id="btn-clear-results">
+              Hapus Riwayat Pengujian Lokal
+            </button>
+          </div>
+
+          <div class="history-table-container">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Waktu</th>
+                  <th>ID Responden</th>
+                  <th>Mode Evaluasi</th>
+                  <th>Jumlah Benar</th>
+                  <th>Skor (0-100)</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body">
+                <!-- Baris tabel riwayat -->
+              </tbody>
+            </table>
+            <p class="empty-state" id="history-empty" style="display: none;">
+              Belum ada riwayat tes yang diselesaikan.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="education.js"></script>
+</body>
+</html>

@@ -190,6 +190,19 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Seluruh 64 tes di repositori lulus via `npm test`.
   - Branch `feat/fase-4` di-merge ke `main`.
 
+### Sprint 5: Modul Edukasi, Pre/Post-Test & Ekspor CSV
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - `extension/education/quiz_bank.json` & `quiz_data.js` memuat 10 butir soal skenario pre-test dan 10 butir soal setara post-test lengkap dengan 4 opsi pilihan, kunci jawaban, dan pembahasan edukatif.
+  - Halaman `education/education.html`, `education.css`, `education.js` memuat 5 materi literasi digital phishing (struktur hostname, typosquatting & homograf, hosting gratis & dynamic DNS, cara hover tautan, langkah darurat).
+  - Sistem kuis interaktif pre-test dan post-test otomatis menilai jawaban, menampilkan pembahasan, dan menyimpan riwayat secara anonim di `chrome.storage.local`.
+  - Fitur ekspor CSV di peramban (`phishshield_results_<id>.csv`) menghasilkan data terstruktur (`id,mode,score,correct_count,total_questions,timestamp`).
+  - Skrip agregasi Node.js `scripts/gabung_hasil.js` dibuat untuk menggabungkan file-file CSV dari banyak responden, menangani CSV kosong, entri ID ganda (mengambil yang terbaru), responden yang hanya memiliki pre-test, dan menghitung skor gain rata-rata.
+  - Seluruh pengujian unit `tests/unit/quiz.test.js` dan `tests/unit/gabung_hasil.test.js` lulus (total 81 tes di repositori lulus 100%).
+  - Branch `feat/fase-5` di-merge ke `main`.
+
+
 
 
 
