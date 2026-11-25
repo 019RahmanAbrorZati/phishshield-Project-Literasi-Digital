@@ -110,6 +110,13 @@ if (typeof document !== 'undefined') {
         } else {
           await chrome.storage.local.set({ respondent_id: respondentId });
         }
+      } else if (typeof window !== 'undefined' && window.localStorage) {
+        const stored = localStorage.getItem('phishshield_respondent_id');
+        if (stored) {
+          respondentId = stored;
+        } else {
+          localStorage.setItem('phishshield_respondent_id', respondentId);
+        }
       }
     } catch (err) {
       console.warn('Gagal memuat respondent_id:', err);
@@ -164,6 +171,8 @@ if (typeof document !== 'undefined') {
         if (confirm('Apakah Anda yakin ingin menghapus seluruh riwayat pengujian lokal ini?')) {
           if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
             await chrome.storage.local.set({ quiz_results: [] });
+          } else if (typeof window !== 'undefined' && window.localStorage) {
+            localStorage.removeItem('phishshield_quiz_results');
           }
           await loadAndRenderResults();
         }
@@ -327,7 +336,7 @@ function renderQuizPlayer(containerId, modeKey, questions, respondentId) {
 }
 
 /**
- * Menyimpan hasil kuis ke chrome.storage.local secara aman.
+ * Menyimpan hasil kuis ke chrome.storage.local atau fallback window.localStorage secara aman.
  */
 async function saveQuizResult(record) {
   try {
@@ -336,6 +345,17 @@ async function saveQuizResult(record) {
       const list = Array.isArray(data.quiz_results) ? data.quiz_results : [];
       list.push(record);
       await chrome.storage.local.set({ quiz_results: list });
+    } else if (typeof window !== 'undefined' && window.localStorage) {
+      let list = [];
+      try {
+        const raw = localStorage.getItem('phishshield_quiz_results');
+        if (raw) list = JSON.parse(raw);
+        if (!Array.isArray(list)) list = [];
+      } catch {
+        list = [];
+      }
+      list.push(record);
+      localStorage.setItem('phishshield_quiz_results', JSON.stringify(list));
     }
   } catch (err) {
     console.warn('Gagal menyimpan hasil kuis:', err);
@@ -343,13 +363,23 @@ async function saveQuizResult(record) {
 }
 
 /**
- * Mengambil daftar riwayat hasil dari storage.
+ * Mengambil daftar riwayat hasil dari storage (chrome.storage.local atau fallback window.localStorage).
  */
 async function getStoredResults() {
   try {
     if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
       const data = await chrome.storage.local.get({ quiz_results: [] });
       return Array.isArray(data.quiz_results) ? data.quiz_results : [];
+    } else if (typeof window !== 'undefined' && window.localStorage) {
+      const raw = localStorage.getItem('phishshield_quiz_results');
+      if (raw) {
+        try {
+          const list = JSON.parse(raw);
+          return Array.isArray(list) ? list : [];
+        } catch {
+          return [];
+        }
+      }
     }
   } catch (err) {
     console.warn('Gagal mengambil riwayat kuis:', err);
