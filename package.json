@@ -4,7 +4,7 @@
   "description": "Ekstensi Chrome pemeriksa hostname berbasis Random Forest klien untuk literasi digital phishing",
   "type": "module",
   "scripts": {
-    "test": "node --test tests/"
+    "test": "node --test"
   },
   "keywords": [
     "phishing-detection",

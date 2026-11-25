@@ -133,3 +133,16 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - `package.json` dan `.gitignore` berhasil dibuat.
   - Pengujian awal framework `node --test tests/` dikonfigurasi.
   - Branch `feat/fase-0` dibuat, di-commit, dan di-merge ke `main`.
+
+### Sprint 1: Ekstraksi Fitur Hostname (Inti)
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - `extension/lib/meta.json` dan `extension/lib/meta.js` berhasil dibuat berdasarkan `model/meta.json`.
+  - `extension/lib/features.js` mem-port persis 16 fitur hostname dan kalkulasi Shannon Entropy.
+  - `tests/unit/features.test.js` memvalidasi seluruh sampel di `golden_features.json` dengan kecocokan float presisi tinggi (< 1e-9) dan integer persis (100%).
+  - Kasus tepi diuji secara komprehensif: URL tanpa skema, prefix www., IPv4, IPv6 brackets, second-level domains (co.id, go.id, ac.id), IDN/punycode, URL tidak valid, dan string kosong.
+  - Perbedaan teknis Python vs JS didokumentasikan di `docs/ARCHITECTURE.md`.
+  - Seluruh 21 tes unit di `features.test.js` lulus.
+  - Branch `feat/fase-1` lulus tes dan di-merge ke `main`.
+
