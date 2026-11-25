@@ -146,3 +146,19 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Seluruh 21 tes unit di `features.test.js` lulus.
   - Branch `feat/fase-1` lulus tes dan di-merge ke `main`.
 
+### Sprint 2: Mesin Inferensi Random Forest Klien
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - `extension/lib/rf.js` berhasil dibuat dengan fungsi `loadModel(json)`, `predictProba(model, featureObj)`, dan `predict(model, featureObj, threshold)`.
+  - Inferensi menggunakan presisi float single (`Math.fround` / `Float32Array`) dan traversal pohon biner scikit-learn (`x <= threshold` ke kiri, selain itu ke kanan).
+  - Validasi terhadap seluruh 300 data uji di `golden_predictions.json`:
+    - Tingkat kesesuaian keputusan: 100,00% (300/300 sampel, target minimum ≥ 99,9%).
+    - Selisih probabilitas maksimum: 9,8133e-8 (jauh di bawah batas toleransi ≤ 1e-4).
+  - Pengukuran benchmark performa (50 iterasi x 300 URL = 15.000 evaluasi):
+    - Waktu inferensi rata-rata per URL: 0,0058 ms (~5,8 µs).
+    - Throughput inferensi: ~172.000 URL per detik di lingkungan Node.js.
+  - Seluruh 6 pengujian unit di `rf.test.js` lulus (total 27 tes di repositori lulus).
+  - Branch `feat/fase-2` di-merge ke `main`.
+
+
