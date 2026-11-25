@@ -229,6 +229,23 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Seluruh 91 tes lulus 100% via `npm test`.
   - Branch `feat/fase-7` di-merge ke `main`.
 
+### Sprint 8: Keamanan, Privasi & Audit Kode
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - Audit kode statis `tests/unit/security_audit.test.js` (11 tes unit):
+    - 0 pemanggilan `fetch()` atau `XMLHttpRequest` di seluruh kode ekstensi (terjamin Zero Network Footprint).
+    - 0 pemanggilan `eval()` atau pembuatan fungsi dinamis (`Function`).
+    - 0 penggunaan `innerHTML` atau `document.write` pada seluruh file JavaScript (bebas celah injeksi DOM XSS).
+    - 0 pencatatan URL lengkap ke `console.log` (menjaga privasi histori penelusuran pengguna).
+    - Verifikasi CSP ketat di `manifest.json` (`script-src 'self'`), melarang skrip inline dan skrip remote.
+    - Verifikasi tidak adanya `host_permissions` luas (`<all_urls>` atau `*://*/*`), izin terbatas hanya pada `webNavigation`, `storage`, `activeTab`, dan `scripting`.
+    - Ketahanan fungsi pembuat alasan (`explainFeatures`) dan penanganan parameter URL terhadap serangan payload XSS.
+    - Verifikasi allowlist bawaan terbebas dari platform konten pengguna (`docs.google.com`, `sites.google.com`, `*.github.io`, dsb) dan pembuktian aturan exact match mencegah bypass suffix domain.
+  - Penyusunan dokumen kebijakan privasi dan keamanan komprehensif di `docs/PRIVACY.md` yang merinci prinsip Privacy by Design, cakupan data yang diproses (hanya hostname), mekanisme penyimpanan lokal di `chrome.storage.local`, jaminan ketiadaan telemetri/analitik, serta tabel justifikasi teknis tiap izin peramban.
+  - Rangkaian pengujian bertambah dari 91 menjadi 102 tes (seluruh 102 tes lulus 100% via `npm test`).
+  - Branch `feat/fase-8` di-merge ke `main`.
+
 
 
 
