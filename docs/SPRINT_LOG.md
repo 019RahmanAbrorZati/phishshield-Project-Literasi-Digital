@@ -246,6 +246,17 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Rangkaian pengujian bertambah dari 91 menjadi 102 tes (seluruh 102 tes lulus 100% via `npm test`).
   - Branch `feat/fase-8` di-merge ke `main`.
 
+### Sprint 9: Dokumentasi Menyeluruh
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - Penyusunan dokumen `README.md` yang mencakup gambaran umum produk, arsitektur, daftar fitur utama, metrik resmi evaluasi model pada dataset (F1 0,782, Precision 0,911, Recall 0,685 pada ambang 0,5), bagian keterbatasan sistem yang transparan dan jujur, bagan struktur repositori, serta panduan instalasi dan pengujian.
+  - Pembaruan dokumen `docs/ARCHITECTURE.md` dengan penambahan 3 diagram alur Mermaid (Arsitektur Komponen Sistem, Alur Keputusan Navigasi, dan Pemetaan Penjelas Alasan Risiko), detail inferensi Random Forest float32 di sisi klien, pemisahan arsitektural modul heuristik DOM lokal, serta komparasi teknis Python vs JavaScript.
+  - Penyusunan panduan pengguna komprehensif di `docs/USER_GUIDE.md` untuk pengguna awam dan penguji capstone, mencakup langkah instalasi Chrome via *Load unpacked*, panduan 4 tab popup, navigasi halaman peringatan edukatif, pengelolaan whitelist, penyesuaian preset sensitivitas, pengerjaan kuis literasi digital, ekspor CSV, penggunaan CLI `gabung_hasil.js`, dan FAQ lengkap dengan penanda placeholder tangkapan layar `[Tangkapan Layar: ...]`.
+  - Penyusunan `CHANGELOG.md` mematuhi standar *Keep a Changelog* yang mendokumentasikan progres rilis dari Fase 0 hingga Fase 9.
+  - Seluruh 102 pengujian unit dan integrasi tetap lulus 100% via `npm test`.
+  - Branch `feat/fase-9` di-merge ke `main`.
+
 
 
 
