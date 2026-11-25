@@ -43,6 +43,20 @@
         <button type="button" class="btn btn-sm btn-outline" id="btn-quick-whitelist" style="display: none;">
           + Tambahkan Host Ini ke Whitelist
         </button>
+
+        <!-- Pemeriksaan Elemen Halaman (Fase 6 Opsional) -->
+        <div class="page-inspect-box">
+          <button type="button" class="btn btn-sm btn-outline" id="btn-inspect-page">
+            🔍 Periksa Elemen Halaman Ini
+          </button>
+          <div class="page-inspect-results" id="page-inspect-results" style="display: none;">
+            <h3 class="inspect-title">Hasil Pemeriksaan Elemen Halaman:</h3>
+            <ul class="inspect-list" id="inspect-list"></ul>
+            <p class="inspect-disclaimer">
+              Catatan: Analisis ini murni berbasis aturan heuristik DOM, bukan hasil pembelajaran mesin (ML).
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 

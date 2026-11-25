@@ -4,6 +4,7 @@
  * Seluruh manipulasi DOM menggunakan textContent (bebas risiko XSS).
  */
 import { hostOf } from '../lib/features.js';
+import { evaluatePageRules, inspectPageDom } from '../lib/page_rules.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   // 1. Navigasi Tab
@@ -64,6 +65,63 @@ document.addEventListener('DOMContentLoaded', async () => {
         chrome.tabs.create({
           url: chrome.runtime.getURL('education/education.html')
         });
+      }
+    });
+  }
+
+  // 7. Pemeriksaan Elemen Halaman (Fase 6 Opsional)
+  const btnInspect = document.getElementById('btn-inspect-page');
+  const inspectResultBox = document.getElementById('page-inspect-results');
+  const inspectListEl = document.getElementById('inspect-list');
+
+  if (btnInspect) {
+    btnInspect.addEventListener('click', async () => {
+      if (typeof chrome === 'undefined' || !chrome.tabs || !chrome.scripting) {
+        alert('Fitur ini hanya dapat dijalankan di peramban Chrome aktif.');
+        return;
+      }
+
+      btnInspect.disabled = true;
+      btnInspect.textContent = 'Memeriksa DOM...';
+
+      try {
+        const activeTabs = await chrome.tabs.query({ active: true, currentWindow: true });
+        const tab = activeTabs[0];
+        if (!tab || !tab.id || !tab.url || (!tab.url.startsWith('http://') && !tab.url.startsWith('https://'))) {
+          alert('Pemeriksaan elemen hanya dapat dilakukan pada halaman web http/https.');
+          btnInspect.disabled = false;
+          btnInspect.textContent = '🔍 Periksa Elemen Halaman Ini';
+          return;
+        }
+
+        const injectionResults = await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          func: inspectPageDom
+        });
+
+        const rawData = injectionResults?.[0]?.result;
+        const evaluation = evaluatePageRules(rawData);
+
+        if (inspectListEl) {
+          while (inspectListEl.firstChild) inspectListEl.removeChild(inspectListEl.firstChild);
+
+          for (const item of evaluation.findings) {
+            const li = document.createElement('li');
+            li.className = `inspect-item ${item.level}`;
+            li.textContent = item.message;
+            inspectListEl.appendChild(li);
+          }
+        }
+
+        if (inspectResultBox) {
+          inspectResultBox.style.display = 'block';
+        }
+      } catch (err) {
+        console.warn('Gagal memeriksa elemen halaman:', err);
+        alert('Tidak dapat memeriksa elemen halaman (halaman mungkin dilindungi atau menolak injeksi script).');
+      } finally {
+        btnInspect.disabled = false;
+        btnInspect.textContent = '🔍 Periksa Elemen Halaman Ini';
       }
     });
   }

