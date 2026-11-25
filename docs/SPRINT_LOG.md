@@ -161,4 +161,18 @@ Model Random Forest diekspor dari scikit-learn dengan inferensi murni di sisi kl
   - Seluruh 6 pengujian unit di `rf.test.js` lulus (total 27 tes di repositori lulus).
   - Branch `feat/fase-2` di-merge ke `main`.
 
+### Sprint 3: Kerangka Ekstensi MV3 & Pemeriksaan Navigasi
+- **Tanggal:** 25 November 2026
+- **Status:** SELESAI
+- **Hasil:**
+  - `extension/manifest.json` MV3 dibuat dengan izin minimal (`webNavigation`, `storage`), CSP aman, dan background service worker module.
+  - Ikon placeholder PNG beresolusi 16x16, 48x48, 128x128 dihasilkan di `extension/assets/`.
+  - `extension/lib/allowlist.json` dan `extension/lib/allowlist.js` mengimplementasikan aturan pencocokan ketat exact host dan wildcard domain `*.` dengan batas titik (lolos pengujian anti-spoofing domain).
+  - Platform konten pengguna (user-content) seperti `docs.google.com`, `*.github.io`, `*.web.app` dipastikan tidak ada di allowlist.
+  - `extension/background/service_worker.js` dibuat untuk memeriksa navigasi frame utama (`frameId === 0`), menyaring skema web http/https, memuat model secara lazy, dan mengalihkan navigasi berisiko ke `warning.html` dengan parameter `host` dan `score` (tanpa URL lengkap).
+  - Komunikasi pesan (`chrome.runtime.onMessage`) dan penyimpanan `chrome.storage.local` mendukung manajemen preset, whitelist, dan session bypass.
+  - Pengujian integrasi `tests/integration/navigation.test.js` dan unit `tests/unit/allowlist.test.js` lulus 100% (total 51 tes di repositori lulus).
+  - Branch `feat/fase-3` di-merge ke `main`.
+
+
 
